@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <title>试卷</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            border: 2px solid black;
+        }
+    </style>
+    <script type="text/javascript">
+        function onloadPage() {
+
+            var location = decodeURIComponent(window.location);
+            var baseDir = location.split("#")[1];
+
+            var title = document.getElementById("div-title");
+            title.innerHTML = baseDir;
+            var CNT = 30;
+            var div = document.getElementById("div-nodes");
+            for (var i = 1; i <= CNT; i++) {
+                var src = ("00" + i);
+                var code = src.substring(src.length - 2, src.length);
+                div.innerHTML += "<label><input type=\"radio\" name=\"radio\"  onclick='clickRadio(\"" + code + "题\")' />" + code + "题</label>";
+                if (i % 10 == 0) {
+                    div.innerHTML += "<p>";
+                }
+            }
+
+        }
+
+        function clickRadio(index) {
+            var location = decodeURIComponent(window.location);
+            var baseDir = location.split("#")[1];
+            var div = document.getElementById("div-content");
+            div.innerHTML = "<img src=\"" +baseDir +"/"+ index + "/question.png\" width=\"850\" align=\"center\"/>";
+        }
+    </script>
+</head>
+<body onload="onloadPage();">
+    <table align="center" width="800">
+        <tr>
+            <th height="50">
+                <div id="div-title"></div>
+            </th>
+        </tr>
+        <tr>
+            <td align="center">
+                <div id="div-nodes"></div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div id="div-content"></div>
+            </td>
+        </tr>
+    </table>
+</body>
+</html>
